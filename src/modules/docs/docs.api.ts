@@ -1,4 +1,4 @@
-import { apiFetch } from "../../api-client.js";
+import { apiFetch } from '../../api-client.js';
 
 export interface DocumentListItem {
   id: string;
@@ -11,7 +11,7 @@ export interface Document extends DocumentListItem {
 }
 
 export async function listDocuments(): Promise<DocumentListItem[]> {
-  const res = await apiFetch<{ entities: DocumentListItem[] }>("/docs/");
+  const res = await apiFetch<{ entities: DocumentListItem[] }>('/docs/');
   return res.entities;
 }
 
