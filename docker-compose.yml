@@ -1,11 +1,9 @@
 services:
-  opencode:
-    image: kinp/pk-central-mcp:1.0.4
-    container_name: pk-central-opencode
+  pk-central-mcp:
+    image: kinp/pk-central-mcp:1.1.0
+    container_name: pk-central-mcp
     ports:
       - '4999:4999'
     env_file:
       - .env
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
-    restart: always
+    restart: unless-stopped
