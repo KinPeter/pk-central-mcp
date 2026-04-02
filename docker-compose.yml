@@ -1,6 +1,6 @@
 services:
   pk-central-mcp:
-    image: kinp/pk-central-mcp:1.1.1
+    image: kinp/pk-central-mcp:1.1.2
     container_name: pk-central-mcp
     ports:
       - '4999:4999'

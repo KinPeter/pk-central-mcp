@@ -2,7 +2,6 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
-import { randomUUID } from 'node:crypto';
 import { registerDocsTools } from './modules/docs/docs.tools.js';
 import { bearerAuth } from './http-auth.js';
 
@@ -21,7 +20,7 @@ async function main() {
     const port = parseInt(process.env.MCP_PORT ?? '4999', 10);
     const host = process.env.MCP_HOST ?? '0.0.0.0';
     const httpTransport = new StreamableHTTPServerTransport({
-      sessionIdGenerator: () => randomUUID(),
+      sessionIdGenerator: undefined,
     });
     const app = createMcpExpressApp({ host });
     app.post('/mcp', bearerAuth, (req, res) => {
