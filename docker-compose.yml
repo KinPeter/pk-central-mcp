@@ -1,6 +1,6 @@
 services:
   opencode:
-    image: kinp/pk-central-mcp:1.0.0
+    image: kinp/pk-central-mcp:1.0.4
     container_name: pk-central-opencode
     ports:
       - '4999:4999'

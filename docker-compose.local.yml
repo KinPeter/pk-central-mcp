@@ -1,6 +1,8 @@
 services:
   opencode:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.local
     container_name: pk-central-opencode
     ports:
       - '4999:4999'

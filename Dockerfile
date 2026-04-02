@@ -5,6 +5,7 @@ RUN apk add --no-cache nodejs npm
 WORKDIR /home/opencode/pk-central-mcp
 
 COPY package.json .
+COPY package-lock.json .
 RUN npm ci --omit=dev
 
 COPY dist ./dist
