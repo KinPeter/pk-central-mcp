@@ -1,0 +1,22 @@
+services:
+  opencode:
+    build: .
+    container_name: pk-central-opencode
+    ports:
+      - '4999:4999'
+    volumes:
+      - ./opencode/AGENTS.md:/home/opencode/AGENTS.md:ro
+      - ./opencode/opencode.json:/home/opencode/opencode.json:ro
+      - ./dist:/home/opencode/pk-central-mcp/dist
+      - ./node_modules:/home/opencode/pk-central-mcp/node_modules:ro
+    environment:
+      - OPENCODE_SERVER_USERNAME=${OPENCODE_SERVER_USERNAME}
+      - OPENCODE_SERVER_PASSWORD=${OPENCODE_SERVER_PASSWORD}
+      - PK_CENTRAL_BASE_URL=${PK_CENTRAL_BASE_URL}
+      - PK_CENTRAL_API_KEY=${PK_CENTRAL_API_KEY}
+    working_dir: /home/opencode/
+    entrypoint: ['']
+    command: ['opencode', 'web', '--hostname', '0.0.0.0', '--port', '4999']
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    restart: unless-stopped

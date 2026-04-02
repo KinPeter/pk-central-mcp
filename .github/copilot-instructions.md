@@ -7,15 +7,25 @@
 ## Build and Run
 
 ```bash
-npm run build      # compile TypeScript → dist/
-npm run dev        # watch mode (recompiles on change, does not restart server)
-npm run start      # run compiled server (stdio transport)
-npm run lint       # ESLint
-npm run lint:fix   # ESLint with auto-fix
-npm run format     # Prettier write
+npm run build        # compile TypeScript → dist/
+npm run dev          # watch mode (recompiles on change, does not restart server)
+npm run start        # run compiled server (stdio transport)
+npm run lint         # ESLint
+npm run lint:fix     # ESLint with auto-fix
+npm run format       # Prettier write
+npm run local        # start local opencode container (docker-compose.local.yml)
+npm run local:stop   # stop local container and remove volumes
+npm run deploy       # bump patch version, build TS, build & push Docker image
 ```
 
 After any code change, rebuild with `npm run build` before testing. There are no automated tests — validate by connecting an MCP client.
+
+## Docker
+
+Two Docker setups exist:
+
+- **Local** (`docker-compose.local.yml` + `Dockerfile.local`): mounts `dist/` and `node_modules/` as volumes for fast iteration. Use `npm run local` / `npm run local:stop`.
+- **Production** (`docker-compose.yml` + `Dockerfile`): builds a self-contained image published to Docker Hub as `kinp/pk-central-mcp:<version>`. Use `npm run deploy` to bump the patch version in `package.json`, compile, build, and push the image. The version in `docker-compose.yml` is updated automatically by `deploy.sh`.
 
 ## Architecture
 

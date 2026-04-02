@@ -11,7 +11,10 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write src/",
-    "format:check": "prettier --check src/"
+    "format:check": "prettier --check src/",
+    "local": "docker compose -f docker-compose.local.yml up",
+    "local:stop": "docker compose -f docker-compose.local.yml down -v",
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.10.1",

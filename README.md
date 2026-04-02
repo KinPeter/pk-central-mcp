@@ -19,11 +19,17 @@ npm run build
 
 ## npm Scripts
 
-| Script          | Description                             |
-| --------------- | --------------------------------------- |
-| `npm run build` | Compile TypeScript to `dist/`           |
-| `npm run dev`   | Watch mode — recompiles on file changes |
-| `npm run start` | Run the compiled server                 |
+| Script               | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| `npm run build`      | Compile TypeScript to `dist/`                      |
+| `npm run dev`        | Watch mode — recompiles on file changes            |
+| `npm run start`      | Run the compiled server                            |
+| `npm run lint`       | Run ESLint                                         |
+| `npm run lint:fix`   | Run ESLint with auto-fix                           |
+| `npm run format`     | Format source files with Prettier                  |
+| `npm run local`      | Start local opencode container (docker compose up) |
+| `npm run local:stop` | Stop and remove local container volumes            |
+| `npm run deploy`     | Bump version, build, and push image to Docker Hub  |
 
 ## Environment Variables
 
@@ -75,3 +81,33 @@ If the MCP client is installed on Windows but Node.js and the server live inside
 ```
 
 > **Note:** After any code change, run `npm run build` and restart the MCP server in your client.
+
+## Docker
+
+### Local development (opencode)
+
+The local setup runs the [opencode](https://opencode.ai) web UI with the MCP server mounted from the host. `dist/` and `node_modules/` are volume-mounted so you can rebuild without rebuilding the image.
+
+```bash
+npm run local        # docker compose -f docker-compose.local.yml up
+npm run local:stop   # docker compose -f docker-compose.local.yml down -v
+```
+
+Required environment variables in a `.env` file or shell:
+
+| Variable                   | Description                    |
+| -------------------------- | ------------------------------ |
+| `OPENCODE_SERVER_USERNAME` | opencode web UI username       |
+| `OPENCODE_SERVER_PASSWORD` | opencode web UI password       |
+| `PK_CENTRAL_BASE_URL`      | Base URL of the PK-Central API |
+| `PK_CENTRAL_API_KEY`       | API key for the PK-Central API |
+
+### Production image
+
+The production `Dockerfile` builds a self-contained image based on the opencode base image, installs Node.js, copies `dist/` and the opencode config files, and packages everything into a single image published to Docker Hub as `kinp/pk-central-mcp`.
+
+```bash
+npm run deploy   # bumps patch version in package.json, builds TS, builds & pushes Docker image
+```
+
+The production `docker-compose.yml` references the published image and accepts the same environment variables as the local setup.
