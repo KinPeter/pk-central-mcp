@@ -106,6 +106,10 @@ If the MCP client is installed on Windows but Node.js and the server live inside
 
 ### HTTP (Streamable HTTP)
 
+The server supports two ways to pass the auth token:
+
+**Bearer header** (preferred):
+
 ```json
 {
   "servers": {
@@ -119,6 +123,21 @@ If the MCP client is installed on Windows but Node.js and the server live inside
   }
 }
 ```
+
+**Query parameter** (for clients that don't support custom headers):
+
+```json
+{
+  "servers": {
+    "pk-central": {
+      "type": "streamable-http",
+      "url": "https://your-domain.com/central-mcp/mcp?api_key=<mcp-auth-token>"
+    }
+  }
+}
+```
+
+> **Note:** When using the query param, consider disabling nginx access logging for the `/central-mcp/` location to avoid the token appearing in log files.
 
 > **Note:** After any code change, run `npm run build` and restart the MCP server in your client.
 
