@@ -3,13 +3,16 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
 import { Request, Response } from 'express';
+import pkg from '../package.json' with { type: 'json' };
 import { registerDocsTools } from './modules/docs/docs.tools.js';
 import { bearerAuth } from './http-auth.js';
+
+const { version } = pkg;
 
 function createMcpServer(): McpServer {
   const server = new McpServer({
     name: 'pk-central',
-    version: '1.0.0',
+    version,
   });
   registerDocsTools(server);
   return server;
