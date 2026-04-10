@@ -30,3 +30,7 @@ Notes are items that have a text content and/or links, and can be pinned or arch
 ## Birthdays
 
 Entries for keeping track of birthdays of friends and family members. Each entry has a name and a date, the date is a string in M/D or MM/DD format (e.g. "3/15" or "03/15"), without the year.
+
+## Visits
+
+Entries for keeping track of visits to cities or other places the user travelled to. Each entry has a city and a country name, latitude and longitude coordinates, and optionally the year of the visit.

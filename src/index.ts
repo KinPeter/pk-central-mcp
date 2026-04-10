@@ -8,6 +8,7 @@ import { registerDocsTools } from './modules/docs/docs.tools.js';
 import { registerPersonalDataTools } from './modules/personal-data/personal-data.tools.js';
 import { registerNotesTools } from './modules/notes/notes.tools.js';
 import { registerBirthdaysTools } from './modules/birthdays/birthdays.tools.js';
+import { registerVisitsTools } from './modules/visits/visits.tools.js';
 import { bearerAuth } from './http-auth.js';
 
 const { version } = pkg;
@@ -21,6 +22,7 @@ function createMcpServer(): McpServer {
   registerPersonalDataTools(server);
   registerNotesTools(server);
   registerBirthdaysTools(server);
+  registerVisitsTools(server);
   return server;
 }
 
