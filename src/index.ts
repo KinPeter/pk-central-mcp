@@ -5,6 +5,7 @@ import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js
 import { Request, Response } from 'express';
 import pkg from '../package.json' with { type: 'json' };
 import { registerDocsTools } from './modules/docs/docs.tools.js';
+import { registerPersonalDataTools } from './modules/personal-data/personal-data.tools.js';
 import { bearerAuth } from './http-auth.js';
 
 const { version } = pkg;
@@ -15,6 +16,7 @@ function createMcpServer(): McpServer {
     version,
   });
   registerDocsTools(server);
+  registerPersonalDataTools(server);
   return server;
 }
 
