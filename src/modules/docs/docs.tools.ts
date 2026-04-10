@@ -1,6 +1,12 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { listDocuments, getDocumentById } from './docs.api.js';
+import {
+  listDocuments,
+  getDocumentById,
+  createDocument,
+  updateDocument,
+  deleteDocument,
+} from './docs.api.js';
 
 export function registerDocsTools(server: McpServer) {
   server.registerTool(
@@ -61,6 +67,81 @@ export function registerDocsTools(server: McpServer) {
               .join('\n'),
           },
         ],
+      };
+    },
+  );
+
+  server.registerTool(
+    'create-document',
+    {
+      description:
+        'Create a new document. Documents are markdown-formatted texts, commonly used for recipes and other notes. Expect documents to be in Hungarian language.',
+      inputSchema: {
+        title: z.string().describe('The document title'),
+        content: z.string().describe('The document content in markdown format'),
+        tags: z
+          .array(z.string())
+          .optional()
+          .describe('Optional tags to categorize the document (e.g. "recipe", "tech")'),
+      },
+    },
+    async ({ title, content, tags }) => {
+      const doc = await createDocument({ title, content, tags });
+
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Document created successfully.\nID: ${doc.id}\nTitle: ${doc.title}${doc.tags.length ? `\nTags: ${doc.tags.join(', ')}` : ''}`,
+          },
+        ],
+      };
+    },
+  );
+
+  server.registerTool(
+    'update-document',
+    {
+      description:
+        "Update an existing document by its ID. Replaces the title, content, and tags. Fetch the document first with 'get-document' if you need to preserve existing content.",
+      inputSchema: {
+        id: z.string().describe('The document ID to update'),
+        title: z.string().describe('The new document title'),
+        content: z.string().describe('The new document content in markdown format'),
+        tags: z
+          .array(z.string())
+          .optional()
+          .describe('Optional tags to categorize the document (e.g. "recipe", "tech")'),
+      },
+    },
+    async ({ id, title, content, tags }) => {
+      const doc = await updateDocument(id, { title, content, tags });
+
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Document updated successfully.\nID: ${doc.id}\nTitle: ${doc.title}${doc.tags.length ? `\nTags: ${doc.tags.join(', ')}` : ''}`,
+          },
+        ],
+      };
+    },
+  );
+
+  server.registerTool(
+    'delete-document',
+    {
+      description:
+        'Permanently delete a document by its ID. This action cannot be undone. Always confirm with the user before deleting a document.',
+      inputSchema: {
+        id: z.string().describe('The document ID to delete'),
+      },
+    },
+    async ({ id }) => {
+      await deleteDocument(id);
+
+      return {
+        content: [{ type: 'text', text: `Document ${id} deleted successfully.` }],
       };
     },
   );
