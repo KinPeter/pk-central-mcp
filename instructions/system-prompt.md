@@ -34,3 +34,7 @@ Entries for keeping track of birthdays of friends and family members. Each entry
 ## Visits
 
 Entries for keeping track of visits to cities or other places the user travelled to. Each entry has a city and a country name, latitude and longitude coordinates, and optionally the year of the visit.
+
+## Data backup email
+
+Using this tool triggers a backup of the user's data and sends it to their email. This is useful for keeping a personal backup of all the data stored in PK-Central, including documents, notes, personal data, visits, birthdays, and more.
