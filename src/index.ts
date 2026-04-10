@@ -7,6 +7,7 @@ import pkg from '../package.json' with { type: 'json' };
 import { registerDocsTools } from './modules/docs/docs.tools.js';
 import { registerPersonalDataTools } from './modules/personal-data/personal-data.tools.js';
 import { registerNotesTools } from './modules/notes/notes.tools.js';
+import { registerBirthdaysTools } from './modules/birthdays/birthdays.tools.js';
 import { bearerAuth } from './http-auth.js';
 
 const { version } = pkg;
@@ -19,6 +20,7 @@ function createMcpServer(): McpServer {
   registerDocsTools(server);
   registerPersonalDataTools(server);
   registerNotesTools(server);
+  registerBirthdaysTools(server);
   return server;
 }
 
