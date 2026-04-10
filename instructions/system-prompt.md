@@ -22,3 +22,7 @@ Documents are textual items that have a title, might have tags, and have a conte
 ## Personal data
 
 Personal data are items that have a name, an identifier value, and optionally an expiry date. These are usually shorter items that can be passport numbers, ID card numbers, loyalty card numbers, or basically any kind of identifier that can be useful to store for the user.
+
+## Notes
+
+Notes are items that have a text content and/or links, and can be pinned or archived. The text content of the notes is limited to 1000 characters and is plain text that is not formatted but can include new line characters. Notes are useful for keeping short pieces of information, reminders, or any kind of textual content that does not require the structure of a document.
