@@ -40,6 +40,10 @@ Entries for keeping track of flights. Each entry has a departure and arrival air
 
 Entries for keeping track of visits to cities or other places the user travelled to. Each entry has a city and a country name, latitude and longitude coordinates, and optionally the year of the visit. The year is a string in YYYY format (e.g. "2022"), but it can be left empty if the user does not want to specify it. You can also search, filter, and query visits by year or country using the "query-visits" tool.
 
+## Trips stats
+
+Get aggregated statistics about the user's trips, including total distance travelled, number of flights, and number of visits. You can filter the stats by year, specific flight IDs, or visit IDs to get more detailed insights about the user's travel history. If you don't find the answer in the aggregated stats, you can also query the individual flights and visits to find the relevant information.
+
 ## Data backup email
 
 Using this tool triggers a backup of the user's data and sends it to their email. This is useful for keeping a personal backup of all the data stored in PK-Central, including documents, notes, personal data, visits, birthdays, and more.
