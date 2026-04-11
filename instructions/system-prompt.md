@@ -33,7 +33,7 @@ Entries for keeping track of birthdays of friends and family members. Each entry
 
 ## Visits
 
-Entries for keeping track of visits to cities or other places the user travelled to. Each entry has a city and a country name, latitude and longitude coordinates, and optionally the year of the visit.
+Entries for keeping track of visits to cities or other places the user travelled to. Each entry has a city and a country name, latitude and longitude coordinates, and optionally the year of the visit. The year is a string in YYYY format (e.g. "2022"), but it can be left empty if the user does not want to specify it. You can also search, filter, and query visits by year or country using the "query-visits" tool.
 
 ## Data backup email
 

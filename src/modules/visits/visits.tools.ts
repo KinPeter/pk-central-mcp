@@ -1,6 +1,13 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { listVisits, createVisit, updateVisit, deleteVisit, Visit } from './visits.api.js';
+import {
+  listVisits,
+  createVisit,
+  updateVisit,
+  deleteVisit,
+  queryVisits,
+  Visit,
+} from './visits.api.js';
 
 function formatVisit(v: Visit) {
   return `- ID: ${v.id} | ${v.city}, ${v.country}${v.year ? ` (${v.year})` : ''} | Coords: ${v.lat}, ${v.lng}`;
@@ -101,6 +108,40 @@ export function registerVisitsTools(server: McpServer) {
 
       return {
         content: [{ type: 'text', text: `Visit ${id} deleted successfully.` }],
+      };
+    },
+  );
+
+  server.registerTool(
+    'query-visits',
+    {
+      description:
+        'Query visited places with optional filters. Returns visits matching all provided filters. If no filters are provided, returns all visits.',
+      inputSchema: {
+        year: z
+          .array(z.string().regex(/^\d{4}$/))
+          .optional()
+          .describe('Filter by one or more years, e.g. ["2024"] or ["2023", "2024"]'),
+        country: z
+          .array(z.string())
+          .optional()
+          .describe('Filter by one or more country names, e.g. ["France"] or ["Korea", "Japan"]'),
+      },
+    },
+    async ({ year, country }) => {
+      const visits = await queryVisits({ year, country });
+
+      if (visits.length === 0) {
+        return { content: [{ type: 'text', text: 'No visits found matching the query.' }] };
+      }
+
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Found ${visits.length} visit(s):\n${visits.map(formatVisit).join('\n')}`,
+          },
+        ],
       };
     },
   );

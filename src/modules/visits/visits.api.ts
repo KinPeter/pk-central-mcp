@@ -41,3 +41,16 @@ export async function deleteVisit(id: string): Promise<void> {
     method: 'DELETE',
   });
 }
+
+export interface VisitQuery {
+  year?: string[];
+  country?: string[];
+}
+
+export async function queryVisits(query: VisitQuery): Promise<Visit[]> {
+  const res = await apiFetch<{ entities: Visit[] }>('/visits/query', {
+    method: 'POST',
+    body: JSON.stringify(query),
+  });
+  return res.entities;
+}
