@@ -20,18 +20,16 @@ npm run build
 
 ## npm Scripts
 
-| Script               | Description                                             |
-| -------------------- | ------------------------------------------------------- |
-| `npm run build`      | Compile TypeScript to `dist/`                           |
-| `npm run dev`        | Watch mode — recompiles on file changes                 |
-| `npm run start`      | Run the compiled server (stdio)                         |
-| `npm run dev:http`   | Run the server in HTTP mode, loading vars from `.env`   |
-| `npm run lint`       | Run ESLint                                              |
-| `npm run lint:fix`   | Run ESLint with auto-fix                                |
-| `npm run format`     | Format source files with Prettier                       |
-| `npm run local`      | Start local opencode container (docker compose up)      |
-| `npm run local:stop` | Stop and remove local container volumes                 |
-| `npm run deploy`     | Bump patch version, build TS, build & push Docker image |
+| Script             | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| `npm run build`    | Compile TypeScript to `dist/`                           |
+| `npm run dev`      | Watch mode — recompiles on file changes                 |
+| `npm run start`    | Run the compiled server (stdio)                         |
+| `npm run dev:http` | Run the server in HTTP mode, loading vars from `.env`   |
+| `npm run lint`     | Run ESLint                                              |
+| `npm run lint:fix` | Run ESLint with auto-fix                                |
+| `npm run format`   | Format source files with Prettier                       |
+| `npm run deploy`   | Bump patch version, build TS, build & push Docker image |
 
 ## Transport Modes
 
